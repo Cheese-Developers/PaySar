@@ -23,9 +23,9 @@ const CreateForm = ({ data, selectedUser }) => {
       } else if (content.length < 30 || content.length > 3000) {
         alert("Please content must be between 30 and 3000 characters");
       } else {
-        if (data && data?.user_id) {
+        if (data && data?.username) {
           const post = {
-            user_id: data?.user_id,
+            username: data?.username,
             title,
             content,
           };
