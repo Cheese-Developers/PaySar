@@ -8,7 +8,7 @@ const ProductRouteGuard = ({ children }) => {
   if (token) {
     return children;
   } else {
-    return <Navigate to={`/`} />;
+    return <Navigate to={`/sign-in`} />;
   }
 };
 
