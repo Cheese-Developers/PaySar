@@ -1,0 +1,40 @@
+.ql-snow .ql-stroke {
+  stroke: #ffffff !important;
+}
+
+.ql-snow .ql-picker {
+  color: #ffffff !important;
+}
+
+.ql-editor {
+  min-height: 300px !important;
+}
+
+.ql-snow .ql-picker.ql-expanded .ql-picker-label {
+  color: #ffffff !important;
+}
+
+.ql-snow.ql-toolbar .ql-picker-label:hover {
+  color: #ff90bc !important;
+}
+
+.ql-snow .ql-picker-options {
+  background-color: #1f1f1f;
+}
+
+.ql-toolbar.ql-snow {
+  border: 1px solid #777777 !important;
+  border-radius: 6px !important;
+}
+
+.ql-container.ql-snow {
+  border: 1px solid #777777 !important;
+  border-bottom-left-radius: 6px !important;
+  border-bottom-right-radius: 6px !important;
+  border-top: 0px !important;
+}
+
+/* placeholder color */
+.ql-editor.ql-blank::before {
+  color: #9198a1 !important;
+}

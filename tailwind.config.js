@@ -2,7 +2,15 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#FF90BC",
+        secondary: "#FAF8F7",
+      },
+      fontFamily: {
+        curve: "'Playball', cursive;",
+      },
+    },
   },
   plugins: [],
 };
