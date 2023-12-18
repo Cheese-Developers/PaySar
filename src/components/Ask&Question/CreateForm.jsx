@@ -25,7 +25,7 @@ const CreateForm = ({ data, selectedUser }) => {
       } else {
         if (data && data?.user_id) {
           const post = {
-            user_id: "U2FsdGVkX1+loEO7UPzeFGRIwm5zy95wAjsImT4Na1U=",
+            user_id: data?.user_id,
             title,
             content,
           };
