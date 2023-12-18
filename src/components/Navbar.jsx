@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useUserDetailQuery } from "../redux/service/api/authApi";
 import Cookies from "js-cookie";
+import { useUserDetailQuery } from "../redux/service/api/userApi";
 
 const Navbar = () => {
   const token = Cookies.get("token");
@@ -14,7 +14,6 @@ const Navbar = () => {
     if (cookieUser) {
       setUser(JSON.parse(cookieUser));
     }
-    console.log("hi");
   }, [cookieUser]);
 
   const authLinks = [
@@ -36,7 +35,7 @@ const Navbar = () => {
     { id: "profile", to: "/profile", name: "profile" },
     {
       id: "ask-question",
-      to: `/user/${data?.user_id}/ask-question`,
+      to: `/user/${data?.username}/ask-question`,
       name: "ask question",
     },
   ];

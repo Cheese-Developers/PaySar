@@ -1,70 +1,45 @@
 import React from "react";
-import { BsSearch } from "react-icons/bs";
-import QuestionCard from "../components/Ask&Question/QuestionCard";
-import RecentCard from "../components/Ask&Question/RecentCard";
 
-const questions = [
-  {
-    id: 1,
-    title: "First Question",
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam esse accusantium corporis, facilis alias praesentium consectetur cupiditate adipisci laborum eaque ipsa ea id doloribus commodi architecto. Corrupti, inventore! Quidem, aliquam?",
-  },
-  {
-    id: 2,
-    title: "Second Question",
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam esse accusantium corporis, facilis alias praesentium consectetur cupiditate adipisci laborum eaque ipsa ea id doloribus commodi architecto. Corrupti, inventore! Quidem, aliquam?",
-  },
-  {
-    id: 3,
-    title: "Third Question",
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam esse accusantium corporis, facilis alias praesentium consectetur cupiditate adipisci laborum eaque ipsa ea id doloribus commodi architecto. Corrupti, inventore! Quidem, aliquam?",
-  },
-];
-
-const anonymous_img =
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzPb_pSj-ir-9eB6mi0lVJdQP1KKHiB8fRBS1CbmOXGd9Z1FEGMJHbEKhahwhWLGSaEXY&usqp=CAU";
+import { useGetReceivePaySarQuery } from "../redux/service/api/postApi";
+import Cookies from "js-cookie";
+import ProfilePost from "../components/profile/ProfilePost";
+import { reverseData } from "../utils/reverseData";
 
 const HomePage = () => {
+  const token = Cookies.get("token");
+  const { data: questions, error, isLoading } = useGetReceivePaySarQuery(token);
+
+  const reverseQuestion = reverseData(questions);
+
   return (
     <div className="text-white pt-32">
-      <div className="">
-        <div className="bg-secondary/80 border rounded-full px-5 p-2 w-2/5 mx-auto flex items-center justify-between gap-5">
-          <input
-            type="text"
-            placeholder="Search your ask question ...."
-            className="bg-transparent text-gray-600 outline-none"
-          />
-
-          <BsSearch size={20} className="text-gray-600" />
-        </div>
+      <div className="flex flex-col justify-center items-center w-full gap-4">
+        <h4 className="text-4xl font-semibold mb-3 font-curve">
+          👋 Hey!! Are you feel lonely?
+        </h4>
+        <p className="text-xl font-medium">
+          Why don't you ask and write fun question to the world?
+        </p>
+        <p className="text-xl font-medium">
+          We are lovely to here your thought 😊
+        </p>
       </div>
-      <div className="bg-slate-950/90 py-10 mt-14">
-        <div className="min-h-full flex justify-between gap-4 w-[65%] mx-auto pt-10">
-          <div className="flex w-[60%] flex-col gap-6">
-            {questions.map((question) => (
-              <QuestionCard
-                key={question.id}
-                {...question}
-                img={anonymous_img}
-              />
-            ))}
+
+      <div className="bg-slate-950/90 py-14 mt-14">
+        {isLoading ? (
+          <div className="py-12 min-h-[450px] flex justify-center items-center">
+            <h3 className="text-secondary font-semibold text-3xl">
+              Loading...
+            </h3>
           </div>
-          <div className="flex flex-col w-[40%]">
-            <h3 className="text-2xl font-semibold mb-4">Recent Topics</h3>
-            <div className="flex flex-col gap-10">
-              {questions.map((question) => (
-                <RecentCard
-                  key={question.id}
-                  {...question}
-                  img={anonymous_img}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+        ) : (
+          <ProfilePost
+            questions={reverseQuestion}
+            error={error}
+            isLoading={isLoading}
+            home={true}
+          />
+        )}
       </div>
     </div>
   );

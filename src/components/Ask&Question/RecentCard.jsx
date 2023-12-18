@@ -1,7 +1,8 @@
 import React from "react";
 import { BiMessageDetail } from "react-icons/bi";
+import ReactTimeAgo from "react-time-ago";
 
-const RecentCard = ({ title, img }) => {
+const RecentCard = ({ title, img, sent_date }) => {
   return (
     <div className="flex flex-col gap-3 text-secondary border-b border-b-gray-600 pb-2">
       <div className="flex items-center gap-3">
@@ -15,7 +16,9 @@ const RecentCard = ({ title, img }) => {
           <span className="text-white">Anonymous</span>
         </div>
       </div>
-      <span className="text-sm text-gray-500 ml-8">45 minutes ago</span>
+      <span className="text-sm text-gray-500 ml-8">
+        <ReactTimeAgo date={sent_date} locale="en-US" />
+      </span>
     </div>
   );
 };

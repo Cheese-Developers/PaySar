@@ -1,9 +1,17 @@
 import React from "react";
 
-const Input = ({ text, id, type = "text", value, onChange }) => {
+const Input = ({
+  text,
+  id,
+  type = "text",
+  value,
+  onChange,
+  required = false,
+  textColor = "text-gray-700",
+}) => {
   return (
     <div className="mb-3 flex flex-col gap-3">
-      <label htmlFor={id} className="text-gray-700">
+      <label htmlFor={id} className={`${textColor}`}>
         {text}
       </label>
       <input
@@ -11,8 +19,9 @@ const Input = ({ text, id, type = "text", value, onChange }) => {
         id={id}
         placeholder={text}
         value={value}
+        required={required}
         onChange={onChange}
-        className="text-gray-700 border border-gray-300 outline-none w-full px-4 py-1 rounded-md bg-transparent"
+        className={`${textColor} border border-gray-300 outline-none w-full px-4 py-1 rounded-md bg-transparent`}
       />
     </div>
   );

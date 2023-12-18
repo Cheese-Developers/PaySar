@@ -1,0 +1,17 @@
+.mantine-Modal-header {
+  background-color: #131c2c !important;
+  color: white !important;
+  border: none !important;
+}
+.mantine-Modal-title {
+  font-size: 1.2rem;
+}
+
+.mantine-Modal-body {
+  background-color: #131c2c !important;
+  color: white !important;
+}
+
+.mantine-Modal-close {
+  color: white !important;
+}

@@ -47,6 +47,7 @@ const SignIn = () => {
             text={"Email"}
             id={"email"}
             value={email}
+            required={true}
             onChange={(e) => setEmail(e.target.value)}
           />
           <Input
@@ -54,6 +55,7 @@ const SignIn = () => {
             text={"Password"}
             id={"password"}
             value={password}
+            required={true}
             onChange={(e) => setPassword(e.target.value)}
           />
           <Input

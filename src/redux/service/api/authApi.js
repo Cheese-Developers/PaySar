@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-// import { baseUrl } from "../../../helper/helper";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -22,27 +21,7 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["auth"],
     }),
-    userInfo: builder.query({
-      query: (name) => ({
-        url: `/api/q&auser/${name}`,
-        method: "GET",
-      }),
-      providesTags: ["auth"],
-    }),
-    userDetail: builder.query({
-      query: (token) => ({
-        url: "/api/user",
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      }),
-      providesTags: ["auth"],
-    }),
   }),
 });
 
-export const {
-  useSignInMutation,
-  useSignUpMutation,
-  useUserInfoQuery,
-  useUserDetailQuery,
-} = authApi;
+export const { useSignInMutation, useSignUpMutation } = authApi;

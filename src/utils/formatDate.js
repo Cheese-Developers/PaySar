@@ -1,7 +1,10 @@
 import { format } from "date-fns";
-export const formatDate = (date) => {
+
+export const formatDate = (dateString) => {
   try {
-    return format(new Date(date), "yyyy MMM d");
+    const date = new Date(dateString);
+    const formattedDate = format(date, "MMMM d, yyyy 'at' h:mm a");
+    return formattedDate;
   } catch (error) {
     console.error("Error formatting date:", error);
     return "Invalid Date";

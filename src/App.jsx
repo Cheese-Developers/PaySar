@@ -8,25 +8,34 @@ import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
 import ru from "javascript-time-ago/locale/ru.json";
 import "./App.css";
+import "@mantine/core/styles.css";
+
+import { MantineProvider } from "@mantine/core";
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
 
 const App = () => {
   return (
-    <Router>
-      <div className="bg-primary min-h-screen flex flex-col">
-        <Navbar />
+    <MantineProvider>
+      <Router>
+        <div className="bg-primary min-h-screen flex flex-col">
+          <Navbar />
 
-        <Routes>
-          {routes.map((route) => (
-            <Route path={route.path} element={route.element} key={route.name} />
-          ))}
-        </Routes>
+          <Routes>
+            {routes.map((route) => (
+              <Route
+                path={route.path}
+                element={route.element}
+                key={route.name}
+              />
+            ))}
+          </Routes>
 
-        <Footer />
-      </div>
-    </Router>
+          <Footer />
+        </div>
+      </Router>
+    </MantineProvider>
   );
 };
 

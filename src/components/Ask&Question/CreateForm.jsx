@@ -3,16 +3,13 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./ask-question.css";
 import Button from "../ui/Button";
-import { useCreatePostMutation } from "../../redux/service/api/postApi";
+import { useCreatePaySarMutation } from "../../redux/service/api/postApi";
 import { useNavigate } from "react-router-dom";
 
-const CreateForm = ({ data, selectedUser }) => {
+const CreateForm = ({ userInfo, selectedUser }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-
-  const [createPost, { isLoading, error, isError }] = useCreatePostMutation();
-
-  console.log(error, isError);
+  const [createPaySar, { isLoading }] = useCreatePaySarMutation();
 
   const navigate = useNavigate();
   const createPostHandler = async (event) => {
@@ -23,26 +20,23 @@ const CreateForm = ({ data, selectedUser }) => {
       } else if (content.length < 30 || content.length > 3000) {
         alert("Please content must be between 30 and 3000 characters");
       } else {
-        if (data && data?.username) {
-          const post = {
-            username: data?.username,
-            title,
-            content,
-          };
-          const res = await createPost(post);
-          const { data, error } = res;
-          console.log(data, error);
-          if (data) {
-            navigate("/");
-            setTitle("");
-            setContent("");
-          } else {
-            alert(error?.data?.msg || "An error has occurred while posting");
-          }
+        const post = {
+          username: userInfo?.username,
+          title: title,
+          content: content,
+        };
+        const res = await createPaySar(post);
+        const { data, error } = res;
+        if (data) {
+          navigate("/");
+          setTitle("");
+          setContent("");
+        } else {
+          alert(error?.data?.msg || "An error has occurred while posting");
         }
       }
     } catch (error) {
-      console.error(error);
+      console.error(error.error);
     }
   };
 

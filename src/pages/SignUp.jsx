@@ -24,17 +24,18 @@ const SignUp = () => {
       if (password !== passwordConfirmation) {
         return alert("Password confirmation and password must be the same");
       }
-      const user = { username, email, password };
-      console.log(user);
-      const res = await signUp(user);
+      // const user = { username, email, password };
+      // console.log(user);
+      // const res = await signUp(user);
 
-      const { data, error } = res;
-      if (data?.data) {
-        dispatch(addUserToken(data.token));
-        navigate("/");
-      } else {
-        console.log(error);
-      }
+      // const { data, error } = res;
+      // if (data?.data) {
+      //   dispatch(addUserToken(data.token));
+      //   navigate("/");
+      // } else {
+      //   console.log(error);
+      // }
+      alert("Opps! We are really sorry. This Page is currently working");
     } catch (error) {
       console.error(error);
     }
@@ -49,12 +50,14 @@ const SignUp = () => {
             text={"Name"}
             id={"name"}
             value={username}
+            required={true}
             onChange={(e) => setUsername(e.target.value)}
           />
           <Input
             text={"Email"}
             id={"email"}
             value={email}
+            required={true}
             onChange={(e) => setEmail(e.target.value)}
           />
           <Input
@@ -62,6 +65,7 @@ const SignUp = () => {
             text={"Password"}
             id={"password"}
             value={password}
+            required={true}
             onChange={(e) => setPassword(e.target.value)}
           />
           <Input
@@ -69,6 +73,7 @@ const SignUp = () => {
             text={"Password Confirmation"}
             id={"password_confirmation"}
             value={passwordConfirmation}
+            required={true}
             onChange={(e) => setPasswordConfirmation(e.target.value)}
           />
           <Button type="submit" text={isLoading ? "Loading..." : "Sign Up"} />
