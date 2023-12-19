@@ -20,7 +20,7 @@ const UserSelection = ({
   );
 
   return (
-    <div className="relative w-[65%] mx-auto">
+    <div className="relative w-[97%] md:w-[80%] lg:w-[70%] xl:w-[65%] mx-auto">
       <div className="user-selection w-full mx-auto overflow-scroll scrollbar">
         <div className="flex flex-row gap-4 md:gap-10 lg:gap-14 xl:gap-16">
           {users &&

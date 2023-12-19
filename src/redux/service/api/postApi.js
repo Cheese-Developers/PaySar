@@ -8,7 +8,7 @@ export const postApi = createApi({
   endpoints: (builder) => ({
     getPost: builder.query({
       query: (token) => ({
-        url: "/paysar",
+        url: "/paysar/get_payser",
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
       }),

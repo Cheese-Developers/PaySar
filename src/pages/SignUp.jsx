@@ -7,6 +7,7 @@ import Input from "../components/ui/Input";
 import AuthForm from "../components/ui/AuthForm";
 import { useDispatch } from "react-redux";
 import { addUserToken } from "../redux/service/slice/userTokenSlice";
+import loader from "../assets/loaderAnimate.json";
 
 const SignUp = () => {
   const [username, setUsername] = useState(null);
@@ -42,49 +43,55 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex justify-center items-center text-primary h-screen">
-      <div className="w-[400px] py-8 px-6 bg-secondary flex flex-col justify-center rounded-md shadow-lg">
-        <AuthFormHeader text={"Sign Up"} />
-        <AuthForm onSubmit={signUpHandler}>
-          <Input
-            text={"Name"}
-            id={"name"}
-            value={username}
-            required={true}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <Input
-            text={"Email"}
-            id={"email"}
-            value={email}
-            required={true}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Input
-            type="password"
-            text={"Password"}
-            id={"password"}
-            value={password}
-            required={true}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Input
-            type="password"
-            text={"Password Confirmation"}
-            id={"password_confirmation"}
-            value={passwordConfirmation}
-            required={true}
-            onChange={(e) => setPasswordConfirmation(e.target.value)}
-          />
-          <Button type="submit" text={isLoading ? "Loading..." : "Sign Up"} />
-        </AuthForm>
-        <div className="flex gap-3 mt-4">
-          <h3 className="text-gray-700">Already have an account?</h3>
-          <Link to={"/sign-in"} className="text-primary font-semibold">
-            Sign In
-          </Link>
+    <div className="flex justify-center items-center text-primary h-[60vh]">
+      {isLoading ? (
+        <div>
+          <Lottie animationData={loader} loop={true} autoplay={true} />
         </div>
-      </div>
+      ) : (
+        <div className="w-[95%] md:w-[400px] py-8 px-6 bg-secondary flex flex-col justify-center rounded-md shadow-lg">
+          <AuthFormHeader text={"Sign Up"} />
+          <AuthForm onSubmit={signUpHandler}>
+            <Input
+              text={"Name"}
+              id={"name"}
+              value={username}
+              required={true}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <Input
+              text={"Email"}
+              id={"email"}
+              value={email}
+              required={true}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              type="password"
+              text={"Password"}
+              id={"password"}
+              value={password}
+              required={true}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Input
+              type="password"
+              text={"Password Confirmation"}
+              id={"password_confirmation"}
+              value={passwordConfirmation}
+              required={true}
+              onChange={(e) => setPasswordConfirmation(e.target.value)}
+            />
+            <Button type="submit" text={"Sign Up"} />
+          </AuthForm>
+          <div className="flex gap-3 mt-4">
+            <h3 className="text-gray-700">Already have an account?</h3>
+            <Link to={"/sign-in"} className="text-primary font-semibold">
+              Sign In
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,8 +1,14 @@
 import React from "react";
+import { useToken } from "../hooks/useToken";
 const Footer = () => {
   const realTimeYear = new Date().getFullYear();
+  const { token } = useToken();
   return (
-    <div className="mt-auto from-pink-900 to-slate-950/90 bg-gradient-to-t">
+    <div
+      className={`mt-auto ${
+        token ? "from-pink-900 to-slate-950/90" : "from-stone-950/90 to-primary"
+      } bg-gradient-to-t`}
+    >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
         <path
           fill="#00000"
@@ -11,7 +17,7 @@ const Footer = () => {
         ></path>
       </svg>
       <div className="bg-black">
-        <div className="w-[65%] mx-auto flex justify-between items-center text-secondary h-32">
+        <div className="w-[97%] md:w-[80%] lg:w-[70%] xl:w-[65%] mx-auto flex justify-between items-center text-secondary h-32">
           <h3 className="text-4xl font-bold font-curve">PaySar</h3>
           <div className="flex justify-center items-center font-medium">
             <h5>© {realTimeYear} All Rights Reserved by FOD</h5>

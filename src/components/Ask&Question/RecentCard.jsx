@@ -7,7 +7,7 @@ const RecentCard = ({ title, img, sent_date }) => {
     <div className="flex flex-col gap-3 text-secondary border-b border-b-gray-600 pb-2">
       <div className="flex items-center gap-3">
         <BiMessageDetail size={20} />
-        <h5 className="font-medium text-lg">{title}</h5>
+        <h5 className="font-medium text-lg line-clamp-1">{title}</h5>
         <div className="flex items-center gap-2">
           <span>by</span>
           <div className="w-4 h-4 overflow-hidden rounded-full">
