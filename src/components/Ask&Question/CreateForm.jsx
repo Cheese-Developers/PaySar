@@ -17,8 +17,8 @@ const CreateForm = ({ userInfo, selectedUser }) => {
     try {
       if (title.length < 10) {
         alert("Please title must be at least 10 characters");
-      } else if (content.length < 30 || content.length > 3000) {
-        alert("Please content must be between 30 and 3000 characters");
+      } else if (content.length < 50 || content.length > 3000) {
+        alert("Please content must be between 50 and 3000 characters");
       } else {
         const post = {
           username: userInfo?.username,
@@ -50,9 +50,15 @@ const CreateForm = ({ userInfo, selectedUser }) => {
           <h3 className="text-secondary text-xl font-semibold mb-5">
             Send New Question to
           </h3>
-          <h3 className="text-secondary text-xl font-semibold mb-5">
-            {selectedUser}
-          </h3>
+          {selectedUser ? (
+            <h3 className="text-xl font-semibold mb-5 text-primary">
+              selectedUser
+            </h3>
+          ) : (
+            <h3 className="font-curve text-xl font-semibold tracking-wide text-primary">
+              Yourself
+            </h3>
+          )}
         </div>
 
         <div className="flex flex-col gap-3 mb-6">

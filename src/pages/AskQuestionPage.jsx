@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import CreateForm from "../components/Ask&Question/CreateForm";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./page.css";
 import Cookies from "js-cookie";
 import { useUserInfoQuery } from "../redux/service/api/userApi";
 import UserSelection from "../components/Ask&Question/UserSelection";
+import UserInformation from "../components/Ask&Question/UserInformation";
+import SectionText from "../components/ui/SectionText";
+import Vector from "../svg/Vector.svg";
 
 const default_img =
   "https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg";
@@ -13,7 +16,7 @@ const AskQuestionPage = () => {
   const { name } = useParams();
   const token = Cookies.get("token");
   const [selectedUser, setSelectedUser] = useState(null);
-  const { data, error, isLoading } = useUserInfoQuery(name);
+  const { data, isLoading } = useUserInfoQuery(name);
 
   useEffect(() => {
     if (data) {
@@ -30,52 +33,35 @@ const AskQuestionPage = () => {
 
   return (
     <div className="pt-32">
-      <div className="mb-14">
-        <h3 className="text-3xl font-semibold text-center text-secondary">
-          Ask Question
-        </h3>
-      </div>
+      <SectionText>
+        <div className="flex flex-col justify-center items-center text-secondary w-2/5 mx-auto h-full z-[2]">
+          <h3 className="text-4xl font-semibold font-curve mb-4 text-center drop-shadow-2xl">
+            ✍️ Share Your Thoughts!
+          </h3>
+          <p className="text-xl font-semibold mb-4 text-center drop-shadow-xl">
+            Wondering how your day is unfolding? Need an outlet? We're here to
+            hear you out—always by your side.
+          </p>
+          <p className="text-xl font-semibold drop-shadow-xl">
+            What's on your mind today?
+          </p>
+        </div>
+      </SectionText>
+
       <div className="bg-slate-950/90 min-h-full">
+        <img src={Vector} alt="" className="w-screen" />
+
         {isLoading ? (
           <div className="h-screen text-5xl text-white flex justify-center items-center">
             Loading...
           </div>
         ) : (
           <div className="py-12 w-[65%] mx-auto">
-            <div className="user-information text-secondary font-medium flex flex-col gap-2">
-              <div className="font-curve text-lg font-semibold flex gap-2 items-center mb-4">
-                <div className="w-10 h-10 rounded-full overflow-hidden">
-                  <img
-                    src={data?.image_url ? data?.image_url : default_img}
-                    alt=""
-                    className="w-10 h-10 object-cover"
-                  />
-                </div>
-                <span> Ask 😊</span>{" "}
-              </div>
-              <h3 className="capitalize flex gap-2">
-                <span className="font-curve"> Name</span> :{" "}
-                <h4 className="font-bold">
-                  <span>{data?.username}</span>
-                </h4>
-              </h3>
-              <h3 className="capitalize flex gap-2">
-                <span className="font-curve"> About</span> :{" "}
-                <h4 className="font-bold">
-                  <span>
-                    {data?.about
-                      ? data?.about
-                      : "Ohh!! Hey, hello. What on your mind?"}
-                  </span>
-                </h4>
-              </h3>
-              {token && (
-                <h3 className="flex gap-2">
-                  <span className="font-curve"> Email</span> :{" "}
-                  <span className="font-bold">{data?.email}</span>
-                </h3>
-              )}
-            </div>
+            <UserInformation
+              data={data}
+              token={token}
+              default_img={default_img}
+            />
           </div>
         )}
         {token && (

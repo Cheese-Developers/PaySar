@@ -1,13 +1,19 @@
 import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addUserToken } from "../redux/service/slice/userTokenSlice";
 
 export const useToken = () => {
-  const [token, setToken] = useState();
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.userToken);
+
   const cookieToken = Cookies.get("token");
 
   useEffect(() => {
-    setToken(cookieToken);
-  }, [cookieToken]);
+    if (cookieToken) {
+      dispatch(addUserToken(cookieToken));
+    }
+  }, [dispatch, cookieToken]);
 
   return token;
 };

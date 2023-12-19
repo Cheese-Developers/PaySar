@@ -11,6 +11,7 @@ import "./App.css";
 import "@mantine/core/styles.css";
 
 import { MantineProvider } from "@mantine/core";
+import { ModalsProvider } from "@mantine/modals";
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
@@ -18,23 +19,25 @@ TimeAgo.addLocale(ru);
 const App = () => {
   return (
     <MantineProvider>
-      <Router>
-        <div className="bg-primary min-h-screen flex flex-col">
-          <Navbar />
+      <ModalsProvider>
+        <Router>
+          <div className="bg-primary min-h-screen flex flex-col">
+            <Navbar />
 
-          <Routes>
-            {routes.map((route) => (
-              <Route
-                path={route.path}
-                element={route.element}
-                key={route.name}
-              />
-            ))}
-          </Routes>
+            <Routes>
+              {routes.map((route) => (
+                <Route
+                  path={route.path}
+                  element={route.element}
+                  key={route.name}
+                />
+              ))}
+            </Routes>
 
-          <Footer />
-        </div>
-      </Router>
+            <Footer />
+          </div>
+        </Router>
+      </ModalsProvider>
     </MantineProvider>
   );
 };

@@ -6,10 +6,10 @@ import { formatDate } from "../../utils/formatDate";
 
 const QuestionCard = ({ title, content, img, sent_date }) => {
   return (
-    <div className="h-96 p-5 rounded-lg bg-slate-800 flex justify-center flex-col shadow-md">
+    <div className="min-h-min p-5 rounded-lg bg-slate-800 flex justify-center flex-col shadow-md">
       <div className="flex gap-4 mb-6">
-        <div className="w-10 h-10 rounded-full overflow-hidden">
-          <img src={img} alt="" className="object-cover w-10 h-10" />
+        <div className="">
+          <img src={img} alt="" className="rounded-full w-10" />
         </div>
         <div className="flex items-center gap-3 text-sm">
           <DiCoffeescript

@@ -23,24 +23,24 @@ const ProfilePost = ({ questions, isLoading, home }) => {
   }
   return (
     <>
-      {questions ? (
+      {questions.length > 0 ? (
         <div className="min-h-full flex justify-between gap-4 w-[65%] mx-auto pt-10 relative text-secondary pb-10">
           <div className="flex w-[60%] flex-col gap-6">
             {questions?.map((question) => (
               <QuestionCard
-                key={question.id}
+                key={question.paysar_id}
                 {...question}
                 img={anonymous_img}
               />
             ))}
           </div>
           <div className="w-[40%] relative">
-            <div className="flex flex-col sticky top-10">
+            <div className="flex flex-col sticky top-28">
               <h3 className="text-2xl font-semibold mb-4">Recent Topics</h3>
               <div className="flex flex-col gap-10">
                 {questions?.map((question) => (
                   <RecentCard
-                    key={question.id}
+                    key={question.paysar_id}
                     {...question}
                     img={anonymous_img}
                   />

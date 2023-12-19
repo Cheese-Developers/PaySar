@@ -12,10 +12,12 @@
   "dependencies": {
     "@mantine/core": "^7.3.2",
     "@mantine/hooks": "^7.3.2",
+    "@mantine/modals": "^7.3.2",
     "@reduxjs/toolkit": "^2.0.1",
     "date-fns": "^2.30.0",
     "javascript-time-ago": "^2.5.9",
     "js-cookie": "^3.0.5",
+    "lottie-react": "^2.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",

@@ -4,7 +4,6 @@ import { Navigate } from "react-router-dom";
 
 const ProductRouteGuard = ({ children }) => {
   const token = Cookies.get("token");
-
   if (token) {
     return children;
   } else {
