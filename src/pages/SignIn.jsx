@@ -37,11 +37,13 @@ const SignIn = () => {
         SweetAlertToast.fire({
           icon: "success",
           title: "Signed in successfully",
+          position: "top",
         });
       } else {
         SweetAlertToast.fire({
           icon: "error",
           title: error?.data?.msg || "Please check your credentials again!",
+          position: "top",
         });
       }
     } catch (error) {
