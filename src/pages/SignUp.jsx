@@ -48,7 +48,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex justify-center items-center text-primary h-[65vh] md:h-screen">
+    <div className="flex justify-center items-center text-primary h-screen">
       {isLoading ? (
         <div>
           <Lottie animationData={loader} loop={true} autoplay={true} />
