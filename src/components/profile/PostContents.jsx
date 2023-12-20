@@ -11,7 +11,7 @@ const PostContents = ({ questions, isLoading, home }) => {
   const { data } = useUserDetailQuery(token);
   const navigate = useNavigate();
 
-  const topFiveRecentlyContents = questions.slice(0, 5);
+  const topFiveRecentlyContents = questions?.slice(0, 5);
 
   const anonymous_img =
     "https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg";
@@ -33,11 +33,12 @@ const PostContents = ({ questions, isLoading, home }) => {
                 key={question.paysar_id}
                 {...question}
                 img={anonymous_img}
+                token={token}
               />
             ))}
           </div>
           <div className="w-[40%] relative hidden md:block">
-            <div className="flex flex-col sticky top-28">
+            <div className="flex flex-col sticky top-48">
               <h3 className="text-2xl font-semibold mb-4">Recent Topics</h3>
               <div className="flex flex-col gap-10">
                 {topFiveRecentlyContents?.map((question) => (

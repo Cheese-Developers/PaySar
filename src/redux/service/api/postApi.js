@@ -3,24 +3,24 @@ import { baseUrl } from "../../../helper/helper";
 
 export const postApi = createApi({
   reducerPath: "postApi",
-  tagTypes: ["post"],
+  tagTypes: ["paysar"],
   baseQuery: fetchBaseQuery({ baseUrl: "https://paysr.onrender.com/v1/api" }),
   endpoints: (builder) => ({
     getPost: builder.query({
       query: (token) => ({
-        url: "/paysar/get_payser",
+        url: `/paysar/get_payser`,
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
       }),
-      providesTags: ["post"],
+      providesTags: ["paysar"],
     }),
     getReceivePaySar: builder.query({
-      query: (token) => ({
-        url: "/paysar",
+      query: ({ token, limit = 5, page = 8 }) => ({
+        url: `/paysar?limit=${limit}&page=${page}`,
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
       }),
-      providesTags: ["post"],
+      providesTags: ["paysar"],
     }),
     createPaySar: builder.mutation({
       query: (paysar) => ({
@@ -28,7 +28,16 @@ export const postApi = createApi({
         method: "POST",
         body: paysar,
       }),
-      invalidatesTags: ["post"],
+      invalidatesTags: ["paysar"],
+    }),
+    replyPaySar: builder.mutation({
+      query: ({ token, paysar }) => ({
+        url: "/paysar",
+        method: "PUT",
+        body: paysar,
+        headers: { Authorization: `Bearer ${token}` },
+      }),
+      invalidatesTags: ["paysar"],
     }),
   }),
 });
@@ -37,4 +46,5 @@ export const {
   useGetPostQuery,
   useGetReceivePaySarQuery,
   useCreatePaySarMutation,
+  useReplyPaySarMutation,
 } = postApi;

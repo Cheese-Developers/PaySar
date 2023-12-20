@@ -2,3 +2,24 @@
   background-color: #131c2c !important;
   height: 100vh;
 }
+
+/* for alert */
+.alert {
+  transition: 0.3s all ease-in-out;
+  position: relative;
+}
+
+.alert.close {
+  transform: translateX(120%);
+  opacity: 1;
+}
+
+.alert.open {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* footer */
+.textarea-feedback::-webkit-scrollbar {
+  display: none;
+}

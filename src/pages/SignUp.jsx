@@ -8,6 +8,7 @@ import AuthForm from "../components/ui/AuthForm";
 import { useDispatch } from "react-redux";
 import { addUserToken } from "../redux/service/slice/userTokenSlice";
 import loader from "../assets/loaderAnimate.json";
+import { SweetAlertToast } from "../libs/SweetAlert";
 
 const SignUp = () => {
   const [username, setUsername] = useState(null);
@@ -33,6 +34,10 @@ const SignUp = () => {
       // if (data?.data) {
       //   dispatch(addUserToken(data.token));
       //   navigate("/");
+      // SweetAlertToast.fire({
+      //   icon: "success",
+      //   title: "Signed in successfully",
+      // });
       // } else {
       //   console.log(error);
       // }
@@ -43,13 +48,13 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex justify-center items-center text-primary h-[60vh] md:h-screen">
+    <div className="flex justify-center items-center text-primary h-[65vh] md:h-screen">
       {isLoading ? (
         <div>
           <Lottie animationData={loader} loop={true} autoplay={true} />
         </div>
       ) : (
-        <div className="w-[95%] md:w-[400px] py-8 px-6 bg-secondary flex flex-col justify-center rounded-md shadow-lg">
+        <div className="w-[95%] md:w-[400px] py-8 px-6 bg-secondary flex flex-col justify-center rounded-md shadow-sm md:shadow-lg">
           <AuthFormHeader text={"Sign Up"} />
           <AuthForm onSubmit={signUpHandler}>
             <Input

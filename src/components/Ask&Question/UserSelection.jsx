@@ -33,7 +33,7 @@ const UserSelection = ({
               >
                 <div
                   key={user.username}
-                  className={` w-16 h-16 md:w-24 md:h-24 rounded-full flex justify-center items-center ${
+                  className={` w-16 h-16 md:w-24 md:h-24 cursor-pointer hover:border-primary hover:border-4 rounded-full flex justify-center items-center ${
                     selectedUser === user.username
                       ? "border-4 border-primary"
                       : ""

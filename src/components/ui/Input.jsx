@@ -21,7 +21,7 @@ const Input = ({
         value={value}
         required={required}
         onChange={onChange}
-        className={`${textColor} border border-gray-300 outline-none w-full px-4 py-1 rounded-md bg-transparent`}
+        className={`${textColor} border border-gray-300 outline-none w-full px-4 py-2 rounded-md bg-transparent`}
       />
     </div>
   );

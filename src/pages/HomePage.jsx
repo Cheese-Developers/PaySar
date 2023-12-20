@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useGetReceivePaySarQuery } from "../redux/service/api/postApi";
 import PostContents from "../components/profile/PostContents";
-import { reverseData } from "../utils/reverseData";
 import Vector from "../svg/Vector.svg";
 
 import "./page.css";
 import SectionText from "../components/ui/SectionText";
 import Cookies from "js-cookie";
+import PaySarPagination from "../components/PaySarPagination";
 
 const HomePage = () => {
   const token = Cookies.get("token");
-  const { data: questions, error, isLoading } = useGetReceivePaySarQuery(token);
+  const [page, setPage] = useState(1);
+  const {
+    data: questions,
+    error,
+    isLoading,
+  } = useGetReceivePaySarQuery({ token, page });
 
-  console.log(questions);
-
-  const reverseQuestion = reverseData(questions?.result);
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <div className="text-white pt-32">
@@ -42,12 +48,26 @@ const HomePage = () => {
             </h3>
           </div>
         ) : (
-          <PostContents
-            questions={reverseQuestion}
-            error={error}
-            isLoading={isLoading}
-            home={true}
-          />
+          <>
+            {questions?.totalPage > 1 && (
+              <div className="sticky top-10 pt-14 z-20 w-full flex justify-center items-center">
+                <PaySarPagination
+                  page={page}
+                  questions={questions}
+                  handlePageChange={handlePageChange}
+                />
+              </div>
+            )}
+            <PostContents
+              questions={questions?.result}
+              error={error}
+              isLoading={isLoading}
+              home={true}
+              totalPage={questions.totalPage}
+              setPage={setPage}
+              page={page}
+            />
+          </>
         )}
       </div>
     </div>

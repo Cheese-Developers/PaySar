@@ -1,7 +1,9 @@
 import React from "react";
+import FeedbackAction from "./Footer/FeedbackAction";
 import { useToken } from "../hooks/useToken";
 const Footer = () => {
   const realTimeYear = new Date().getFullYear();
+  // const user = Cookies.get("user");
   const { token } = useToken();
   return (
     <div
@@ -9,6 +11,7 @@ const Footer = () => {
         token ? "from-pink-900 to-slate-950/90" : "from-stone-950/90 to-primary"
       } bg-gradient-to-t`}
     >
+      {token && <FeedbackAction />}
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
         <path
           fill="#00000"

@@ -7,39 +7,65 @@ import { useCreatePaySarMutation } from "../../redux/service/api/postApi";
 import { useNavigate } from "react-router-dom";
 import { openModalCustom } from "../ui/Modal";
 import { Text } from "@mantine/core";
+import Cookies from "js-cookie";
+import Swal from "sweetalert2";
 
 const CreateForm = ({ userInfo, selectedUser }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [createPaySar, { isLoading }] = useCreatePaySarMutation();
-
-  const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
+  const navigate = useNavigate();
+  const cookiePostLimit = parseInt(Cookies.get("post") || 0, 10);
 
   const confirmationPost = async () => {
-    const post = {
-      username: userInfo?.username,
-      title: title,
-      content: content,
-    };
-    const res = await createPaySar(post);
-    const { data, error } = res;
-    if (data) {
-      navigate("/");
-      setTitle("");
-      setContent("");
-    } else {
-      alert(error?.data?.msg || "An error has occurred while posting");
+    try {
+      const post = {
+        username: userInfo?.username,
+        title: title,
+        content: content,
+      };
+      if (cookiePostLimit >= 1) {
+        return alert("Your daily post (3) limit has been reached");
+      }
+      const res = await createPaySar(post);
+      const { data, error } = res;
+      if (data) {
+        navigate("/");
+        const expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + 1);
+        Cookies.set("post", cookiePostLimit + 1, { expires: expirationDate });
+        setTitle("");
+        setContent("");
+      } else {
+        alert(error?.data?.msg || "An error has occurred while posting");
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      alert("An unexpected error has occurred while posting");
     }
   };
 
-  const navigate = useNavigate();
   const createPostHandler = async (event) => {
     event.preventDefault();
     try {
-      if (title.length < 10) {
-        alert("Please title must be at least 10 characters");
+      if (cookiePostLimit >= 1) {
+        Swal.fire({
+          icon: "warning",
+          title: "Post Limit Exceeded",
+          text: "You have reached the maximum limit of posts for today (3 posts).",
+        });
+      } else if (title.length < 10) {
+        Swal.fire({
+          icon: "error",
+          title: "Invalid Title",
+          text: "Please title must be at least 10 characters.",
+        });
       } else if (content.length < 50 || content.length > 3000) {
-        alert("Please content must be between 50 and 3000 characters");
+        Swal.fire({
+          icon: "error",
+          title: "Invalid Content Length",
+          text: "Please content must be between 50 and 3000 characters.",
+        });
       } else {
         await openCreateConfirmModal();
       }
@@ -49,7 +75,6 @@ const CreateForm = ({ userInfo, selectedUser }) => {
   };
 
   const openCreateConfirmModal = async () => {
-    setLogoutModalOpen(true);
     openModalCustom({
       title: "Post Confirmation",
       children: (
@@ -60,7 +85,7 @@ const CreateForm = ({ userInfo, selectedUser }) => {
       confirmText: "Let's do it! 🌟",
       cancelText: "Hmm, I'll give it thought 🤔",
       onConfirm: confirmationPost,
-      onCancel: () => setLogoutModalOpen(false),
+      onCancel: () => {},
     });
   };
 
@@ -76,11 +101,11 @@ const CreateForm = ({ userInfo, selectedUser }) => {
           </h3>
           {selectedUser ? (
             <h3 className="text-lg md:text-xl font-semibold mb-5 text-primary">
-              selectedUser
+              {selectedUser}
             </h3>
           ) : (
             <h3 className="font-curve text-lg md:text-xl font-semibold tracking-wide text-primary">
-              Yourself
+              Make Yourself A Note
             </h3>
           )}
         </div>

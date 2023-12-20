@@ -38,3 +38,14 @@
 .ql-editor.ql-blank::before {
   color: #9198a1 !important;
 }
+
+/* popover */
+.mantine-Popover-dropdown {
+  border: none !important;
+  background-color: #ff90bc !important;
+}
+
+.mantine-Popover-arrow {
+  border: none !important;
+  background-color: #ff90bc !important;
+}

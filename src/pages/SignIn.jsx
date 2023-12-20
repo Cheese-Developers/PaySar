@@ -9,11 +9,13 @@ import { useDispatch } from "react-redux";
 import { addUserToken } from "../redux/service/slice/userTokenSlice";
 import Lottie from "lottie-react";
 import loader from "../assets/loaderAnimate.json";
+import { SweetAlertToast } from "../libs/SweetAlert";
+import Cookies from "js-cookie";
 
 const SignIn = () => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const [passwordConfirmation, setPasswordConfirmation] = useState(null);
+  const cookiesPost = Cookies.get("post");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,16 +24,20 @@ const SignIn = () => {
   const signInHandler = async (event) => {
     event.preventDefault();
     try {
-      if (password !== passwordConfirmation) {
-        return alert("Password confirmation and password must be the same");
-      }
       const user = { email, password };
       const res = await signIn(user);
 
       const { data, error } = res;
       if (data?.data) {
         dispatch(addUserToken(data.token));
+        const expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + 1);
+        !cookiesPost && Cookies.set("post", 0, { expires: expirationDate });
         navigate("/");
+        SweetAlertToast.fire({
+          icon: "success",
+          title: "Signed in successfully",
+        });
       } else {
         console.log(error);
       }
@@ -41,13 +47,13 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex justify-center items-center text-primary h-[60vh] md:h-screen">
+    <div className="flex justify-center items-center text-primary h-[65vh] md:h-screen">
       {isLoading ? (
         <div>
           <Lottie animationData={loader} loop={true} autoplay={true} />
         </div>
       ) : (
-        <div className="w-[95%] md:w-[400px] py-8 px-6 bg-secondary flex flex-col justify-center rounded-md shadow-lg">
+        <div className="w-[95%] md:w-[400px] py-8 px-6 bg-secondary flex flex-col justify-center rounded-md shadow-md md:shadow-lg">
           <AuthFormHeader text={"Sign In"} />
           <AuthForm onSubmit={signInHandler}>
             <Input
@@ -64,13 +70,6 @@ const SignIn = () => {
               value={password}
               required={true}
               onChange={(e) => setPassword(e.target.value)}
-            />
-            <Input
-              type="password"
-              text={"Password Confirmation"}
-              id={"password_confirmation"}
-              value={passwordConfirmation}
-              onChange={(e) => setPasswordConfirmation(e.target.value)}
             />
             <Button type="submit" text={"Sign In"} />
           </AuthForm>
