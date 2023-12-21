@@ -53,7 +53,7 @@ const AskQuestionPage = () => {
             Wondering how your day is unfolding? Need an outlet? We're here to
             hear you out—always by your side.
           </p>
-          <p className="text-xl font-semibold drop-shadow-xl">
+          <p className="text-3xl font-semibold drop-shadow-xl">
             What's on your mind today?
           </p>
         </div>

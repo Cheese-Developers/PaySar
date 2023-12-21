@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import QuestionCard from "../Ask&Question/QuestionCard";
 import RecentCard from "../Ask&Question/RecentCard";
 import Cookies from "js-cookie";
@@ -15,7 +15,21 @@ const PostContents = ({ questions, isLoading, home }) => {
 
   const anonymous_img =
     "https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg";
-
+  const memoQuestion = useMemo(() => {
+    return questions?.map((q) => (
+      <QuestionCard
+        key={q.paysar_id}
+        {...q}
+        img={anonymous_img}
+        token={token}
+      />
+    ));
+  }, [questions]);
+  const memoRecently = useMemo(() => {
+    return topFiveRecentlyContents?.map((q) => (
+      <RecentCard key={q.paysar_id} {...q} img={anonymous_img} token={token} />
+    ));
+  }, [topFiveRecentlyContents]);
   if (isLoading) {
     return (
       <div className="h-[50vh] text-secondary flex justify-center items-center gap-4 w-[97%] md:w-[80%] lg:w-[70%] xl:w-[65%] mx-auto">
@@ -23,31 +37,34 @@ const PostContents = ({ questions, isLoading, home }) => {
       </div>
     );
   }
+
   return (
     <>
       {questions.length > 0 ? (
         <div className="min-h-full flex justify-between gap-4 w-[97%] md:w-[80%] lg:w-[70%] xl:w-[65%] mx-auto pt-10 relative text-secondary pb-10">
           <div className="flex w-full md:w-[60%] flex-col gap-6">
-            {questions?.map((question) => (
+            {/* {questions?.map((question) => (
               <QuestionCard
                 key={question.paysar_id}
                 {...question}
                 img={anonymous_img}
                 token={token}
               />
-            ))}
+            ))} */}
+            {memoQuestion}
           </div>
           <div className="w-[40%] relative hidden md:block">
             <div className="flex flex-col sticky top-48">
               <h3 className="text-2xl font-semibold mb-4">Recent Topics</h3>
               <div className="flex flex-col gap-10">
-                {topFiveRecentlyContents?.map((question) => (
+                {/* {topFiveRecentlyContents?.map((question) => (
                   <RecentCard
                     key={question.paysar_id}
                     {...question}
                     img={anonymous_img}
                   />
-                ))}
+                ))} */}
+                {memoRecently}
               </div>
             </div>
           </div>

@@ -74,12 +74,13 @@ const QuestionCard = ({ title, content, img, sent_date, paysar_id, token }) => {
       </div>
       <div className="flex gap-4">
         <h3 className="text-3xl font-semibold pb-3">Q:</h3>
-        <div className="question flex flex-col gap-2">
+        <div className="question flex flex-col w-full gap-2">
           <h4 className="text-xl font-semibold">{title}</h4>
           <div
-            className="text-base text-gray-200 border-b border-b-gray-600 pb-2"
+            className="text-base text-gray-200"
             dangerouslySetInnerHTML={{ __html: content }}
           />
+          <hr className="border-b border-b-gray-600 bg-transparent border-t-0 pb-2" />
           <div className="mt-4">
             <Popover
               width={350}
@@ -87,7 +88,7 @@ const QuestionCard = ({ title, content, img, sent_date, paysar_id, token }) => {
               position="bottom"
               withArrow
               zIndex={10}
-              offset={{ mainAxis: 10, crossAxis: 100 }}
+              offset={{ mainAxis: 10, crossAxis: 90 }}
               shadow="xl"
             >
               <Popover.Target>

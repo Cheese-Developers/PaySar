@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useToken } from "../../hooks/useToken";
 import { useNavLink } from "../../hooks/useNavLink";
 import Logout from "../Logout";
+import "./navbar.css";
 
 const NavbarLink = ({ close }) => {
   const { token } = useToken();
@@ -13,22 +14,22 @@ const NavbarLink = ({ close }) => {
       {token
         ? links.map((link) => (
             <li key={link.id} onClick={() => close()}>
-              <Link
+              <NavLink
                 to={link.to}
                 className="uppercase outline-none md:font-medium text-2xl font-semibold md:text-sm"
               >
                 {link.name}
-              </Link>
+              </NavLink>
             </li>
           ))
         : authLinks.map((link) => (
             <li key={link.id} onClick={() => close()}>
-              <Link
+              <NavLink
                 to={link.to}
                 className="uppercase outline-none md:font-medium text-2xl font-semibold md:text-sm"
               >
                 {link.name}
-              </Link>
+              </NavLink>
             </li>
           ))}
       <Logout close={close} />

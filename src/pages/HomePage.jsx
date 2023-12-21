@@ -30,10 +30,10 @@ const HomePage = () => {
           <h4 className="text-3xl md:text-4xl font-semibold font-curve mb-4 text-center drop-shadow-2xl">
             👋 Hey!! Are you feeling lonely?
           </h4>
-          <p className="text-lg md:text-xl font-medium drop-shadow-xl text-center">
+          <p className="text-xl font-semibold mb-4 text-center drop-shadow-xl">
             Why don't you ask and write a fun question to the world?
           </p>
-          <p className="text-lg md:text-xl font-medium drop-shadow-xl text-center">
+          <p className="text-xl font-semibold mb-4 text-center drop-shadow-xl">
             We are lovely to hear your thoughts 😊
           </p>
         </div>
@@ -50,7 +50,7 @@ const HomePage = () => {
         ) : (
           <>
             {questions?.totalPage > 1 && (
-              <div className="sticky top-10 pt-14 z-20 w-full flex justify-center items-center">
+              <div className="sticky top-5 md:top-10 pt-14 z-20 w-full flex justify-center items-center">
                 <PaySarPagination
                   page={page}
                   questions={questions}

@@ -4,7 +4,6 @@ import PostContents from "../components/profile/PostContents";
 import { useGetPostQuery } from "../redux/service/api/postApi";
 import { useUserDetailQuery } from "../redux/service/api/userApi";
 import UserInfoProfile from "../components/profile/UserInfoProfile";
-import { reverseData } from "../utils/reverseData";
 import SectionText from "../components/ui/SectionText";
 import Vector from "../svg/Vector.svg";
 
@@ -18,10 +17,6 @@ const ProfilePage = () => {
     isLoading: questionLoading,
   } = useGetPostQuery(token);
 
-  console.log(questionError, questions);
-
-  // const reverseQuestions = reverseData();
-
   return (
     <div className="pt-32">
       <SectionText>
@@ -33,7 +28,9 @@ const ProfilePage = () => {
             In the brief tapestry of existence, let's dance with joy, embracing
             the symphony of life until our final bow. 🌟
           </p>
-          <p className="text-xl font-semibold drop-shadow-xl">About Me</p>
+          <p className="text-2xl md:text-3xl font-semibold drop-shadow-xl">
+            About Me
+          </p>
         </div>
       </SectionText>
 
