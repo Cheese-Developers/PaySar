@@ -27,6 +27,7 @@ const UserSelection = ({
             filterUsers.map((user) => (
               <div
                 className=""
+                key={user?.username}
                 onClick={() => {
                   navigate(`/user/${user?.username}/ask-question`);
                 }}

@@ -24,7 +24,7 @@ const CreateForm = ({ userInfo, selectedUser }) => {
         title: title,
         content: content,
       };
-      if (cookiePostLimit >= 3) {
+      if (cookiePostLimit >= 10) {
         return alert("Your daily post (3) limit has been reached");
       }
       const res = await createPaySar(post);
@@ -48,7 +48,7 @@ const CreateForm = ({ userInfo, selectedUser }) => {
   const createPostHandler = async (event) => {
     event.preventDefault();
     try {
-      if (cookiePostLimit >= 3) {
+      if (cookiePostLimit >= 10) {
         Swal.fire({
           icon: "warning",
           title: "Post Limit Exceeded",
