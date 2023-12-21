@@ -20,7 +20,7 @@ const Navbar = () => {
       <div className="w-[95%] md:w-[80%] lg:w-[70%] xl:w-[65%] mx-auto flex justify-between items-center h-full px-3 md:px-0">
         <h3 className="text-4xl font-bold font-curve">PaySar</h3>
         <div className="md:block hidden">
-          <NavbarLink />
+          <NavbarLink close={close} />
         </div>
         <div className="md:hidden block">
           <button className="outline-none" onClick={open}>

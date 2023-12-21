@@ -12,7 +12,7 @@ const NavbarLink = ({ close }) => {
     <ul className="flex justify-center flex-col md:flex-row items-center gap-8">
       {token
         ? links.map((link) => (
-            <li key={link.id} onClick={() => close()}>
+            <li key={link.id} onClick={() => (close && close()) || {}}>
               <Link
                 to={link.to}
                 className="uppercase outline-none md:font-medium text-2xl font-semibold md:text-sm"
@@ -22,7 +22,7 @@ const NavbarLink = ({ close }) => {
             </li>
           ))
         : authLinks.map((link) => (
-            <li key={link.id} onClick={() => close()}>
+            <li key={link.id} onClick={() => (close && close()) || {}}>
               <Link
                 to={link.to}
                 className="uppercase outline-none md:font-medium text-2xl font-semibold md:text-sm"

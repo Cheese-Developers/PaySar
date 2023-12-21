@@ -37,8 +37,6 @@ const AskQuestionPage = () => {
     expirationDate.setDate(expirationDate.getDate() + 1);
     if (!cookiesPost) {
       Cookies.set("post", 0, { expires: expirationDate });
-    } else {
-      return null;
     }
   }, []);
 
