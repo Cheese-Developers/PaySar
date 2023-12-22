@@ -12,6 +12,7 @@ import "@mantine/core/styles.css";
 
 import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
+import { ParallaxProvider } from "react-scroll-parallax";
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
@@ -20,23 +21,25 @@ const App = () => {
   return (
     <MantineProvider>
       <ModalsProvider>
-        <Router>
-          <div className="bg-primary min-h-screen flex flex-col">
-            <Navbar />
+        <ParallaxProvider>
+          <Router>
+            <div className="min-h-screen flex flex-col">
+              <Navbar />
 
-            <Routes>
-              {routes.map((route) => (
-                <Route
-                  path={route.path}
-                  element={route.element}
-                  key={route.name}
-                />
-              ))}
-            </Routes>
+              <Routes>
+                {routes.map((route) => (
+                  <Route
+                    path={route.path}
+                    element={route.element}
+                    key={route.name}
+                  />
+                ))}
+              </Routes>
 
-            <Footer />
-          </div>
-        </Router>
+              <Footer />
+            </div>
+          </Router>
+        </ParallaxProvider>
       </ModalsProvider>
     </MantineProvider>
   );

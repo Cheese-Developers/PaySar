@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <nav
       className={
-        "h-16 md:h-24 text-secondary bg-primary/30 md:bg-primary backdrop-blur-lg sticky top-0 z-50"
+        "h-16 md:h-24 text-secondary bg-primary/30 md:bg-primary backdrop-blur-lg sticky top-0 z-50 shadow"
       }
     >
       <div className="w-[95%] md:w-[80%] lg:w-[70%] xl:w-[65%] mx-auto flex justify-between items-center h-full px-3 md:px-0">
