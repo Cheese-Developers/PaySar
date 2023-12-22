@@ -22,6 +22,7 @@ const PostContents = ({ questions, isLoading, home }) => {
         {...q}
         img={anonymous_img}
         token={token}
+        home={home}
       />
     ));
   }, [questions]);

@@ -7,7 +7,16 @@ import "./ask-question.css";
 import { useReplyPaySarMutation } from "../../redux/service/api/postApi";
 import { openModalCustom } from "../ui/Modal";
 
-const QuestionCard = ({ title, content, img, sent_date, paysar_id, token }) => {
+const QuestionCard = ({
+  title,
+  content,
+  img,
+  sent_date,
+  paysar_id,
+  token,
+  username,
+  home,
+}) => {
   const [reply, setReply] = useState("");
   const [replyPaySar, { isLoading }] = useReplyPaySarMutation();
   const replyHandler = async () => {
@@ -47,6 +56,8 @@ const QuestionCard = ({ title, content, img, sent_date, paysar_id, token }) => {
     });
   };
 
+  console.log(username);
+
   return (
     <div className="min-h-min p-5 rounded-lg bg-slate-800 flex justify-center flex-col shadow-md">
       <div className="flex gap-4 mb-6">
@@ -59,7 +70,7 @@ const QuestionCard = ({ title, content, img, sent_date, paysar_id, token }) => {
             className="text-gray-400 hover:text-gray-200 duration-150"
           />
           <span className="text-gray-400 hover:text-gray-200 duration-150">
-            Guest
+            {username ? username : "Anonymous"}
           </span>
         </div>
         <div className="flex items-center gap-3 text-sm">
@@ -82,46 +93,48 @@ const QuestionCard = ({ title, content, img, sent_date, paysar_id, token }) => {
           />
           <hr className="border-b border-b-gray-600 bg-transparent border-t-0 pb-2" />
           <div className="mt-4">
-            <Popover
-              width={350}
-              trapFocus
-              position="bottom"
-              withArrow
-              zIndex={10}
-              offset={{ mainAxis: 10, crossAxis: 90 }}
-              shadow="xl"
-            >
-              <Popover.Target>
-                <Button color="white" bg={"#FF90BC"} className="outline-none">
-                  Reply
-                </Button>
-              </Popover.Target>
-              <Popover.Dropdown>
-                <div className="text-secondary">
-                  <div className="flex items-center gap-3 mb-3">
-                    <img src={img} alt="" className="w-8 h-8 rounded-full" />
-                    <h3 className="text-sm font-semibold">Anonymous</h3>
-                  </div>
-                  <textarea
-                    name=""
-                    id=""
-                    rows={"4"}
-                    value={reply}
-                    required
-                    onChange={(e) => setReply(e.target.value)}
-                    className="w-full text-sm outline-none rounded-md resize-none placeholder:italic placeholder:text-sm text-gray-600 px-2 py-1"
-                    placeholder="Reply here ..."
-                  />
+            {token && home && (
+              <Popover
+                width={350}
+                trapFocus
+                position="bottom"
+                withArrow
+                zIndex={10}
+                offset={{ mainAxis: 10, crossAxis: 90 }}
+                shadow="xl"
+              >
+                <Popover.Target>
+                  <Button color="white" bg={"#FF90BC"} className="outline-none">
+                    Reply
+                  </Button>
+                </Popover.Target>
+                <Popover.Dropdown>
+                  <div className="text-secondary">
+                    <div className="flex items-center gap-3 mb-3">
+                      <img src={img} alt="" className="w-8 h-8 rounded-full" />
+                      <h3 className="text-sm font-semibold">Anonymous</h3>
+                    </div>
+                    <textarea
+                      name=""
+                      id=""
+                      rows={"4"}
+                      value={reply}
+                      required
+                      onChange={(e) => setReply(e.target.value)}
+                      className="w-full text-sm outline-none rounded-md resize-none placeholder:italic placeholder:text-sm text-gray-600 px-2 py-1"
+                      placeholder="Reply here ..."
+                    />
 
-                  <button
-                    onClick={openReplyModal}
-                    className="bg-secondary rounded-md text-primary font-semibold active:scale-95 text-sm px-5 py-1.5"
-                  >
-                    Send Now
-                  </button>
-                </div>
-              </Popover.Dropdown>
-            </Popover>
+                    <button
+                      onClick={openReplyModal}
+                      className="bg-secondary rounded-md text-primary font-semibold active:scale-95 text-sm px-5 py-1.5"
+                    >
+                      Send Now
+                    </button>
+                  </div>
+                </Popover.Dropdown>
+              </Popover>
+            )}
           </div>
         </div>
       </div>

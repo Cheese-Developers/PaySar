@@ -3,7 +3,10 @@ import CreateForm from "../components/Ask&Question/CreateForm";
 import { useParams } from "react-router-dom";
 import "./page.css";
 import Cookies from "js-cookie";
-import { useUserInfoQuery } from "../redux/service/api/userApi";
+import {
+  useUserDetailQuery,
+  useUserInfoQuery,
+} from "../redux/service/api/userApi";
 import UserSelection from "../components/Ask&Question/UserSelection";
 import UserInformation from "../components/Ask&Question/UserInformation";
 import SectionText from "../components/ui/SectionText";
@@ -16,11 +19,14 @@ const AskQuestionPage = () => {
   const { name } = useParams();
   const token = Cookies.get("token");
   const [selectedUser, setSelectedUser] = useState(null);
-  const { data, isLoading } = useUserInfoQuery(name);
+  const { data: loggedUser, isLoading: loggedUserLoading } =
+    useUserDetailQuery(token);
+  const { data: unLoggedUser, isLoading: unLoggedUserLoading } =
+    useUserInfoQuery(name);
 
   useEffect(() => {
-    if (data) {
-      const stringyData = JSON.stringify(data);
+    if (unLoggedUser) {
+      const stringyData = JSON.stringify(unLoggedUser);
 
       const expirationTimeInMinutes = 45;
       const expirationDate = new Date(
@@ -29,7 +35,7 @@ const AskQuestionPage = () => {
 
       Cookies.set("user", stringyData, { expires: expirationDate });
     }
-  }, [data]);
+  }, [unLoggedUser]);
 
   useEffect(() => {
     const cookiesPost = parseInt(Cookies.get("post") || 0, 10);
@@ -60,14 +66,14 @@ const AskQuestionPage = () => {
       <div className="bg-slate-950/90 min-h-full">
         <img src={Vector} alt="" className="w-screen select-none" />
 
-        {isLoading ? (
+        {loggedUserLoading || unLoggedUserLoading ? (
           <div className="h-screen text-5xl text-white flex justify-center items-center">
             Loading...
           </div>
         ) : (
           <div className="py-12 w-[95%] md:w-[80%] lg:w-[70%] xl:w-[65%] mx-auto">
             <UserInformation
-              data={data}
+              data={loggedUser || unLoggedUser}
               token={token}
               default_img={default_img}
             />
@@ -81,7 +87,11 @@ const AskQuestionPage = () => {
             default_img={default_img}
           />
         )}
-        <CreateForm userInfo={data} selectedUser={selectedUser} />
+        <CreateForm
+          userInfo={loggedUser}
+          selectedUser={selectedUser}
+          name={name}
+        />
       </div>
     </div>
   );

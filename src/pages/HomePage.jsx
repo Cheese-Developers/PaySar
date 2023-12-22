@@ -48,16 +48,7 @@ const HomePage = () => {
             </h3>
           </div>
         ) : (
-          <>
-            {questions?.totalPage > 1 && (
-              <div className="sticky top-5 md:top-10 pt-14 z-20 w-full flex justify-center items-center">
-                <PaySarPagination
-                  page={page}
-                  questions={questions}
-                  handlePageChange={handlePageChange}
-                />
-              </div>
-            )}
+          <div>
             <PostContents
               questions={questions?.result}
               error={error}
@@ -67,7 +58,16 @@ const HomePage = () => {
               setPage={setPage}
               page={page}
             />
-          </>
+            {questions?.totalPage > 1 && (
+              <div className="sticky top-5 md:top-10 pt-14 z-20 w-full flex justify-center items-center">
+                <PaySarPagination
+                  page={page}
+                  questions={questions}
+                  handlePageChange={handlePageChange}
+                />
+              </div>
+            )}
+          </div>
         )}
       </div>
     </div>
