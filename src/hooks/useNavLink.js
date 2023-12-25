@@ -23,10 +23,8 @@ export const useNavLink = () => {
         ? `/user/${
             data?.username ? data?.username : user && user?.username
           }/ask-question`
-        : "get-started",
-      name: `${
-        data?.username || user?.username ? "ask question" : "get started"
-      }`,
+        : "/sign-in",
+      name: `${user?.username ? "ask question" : "get started"}`,
     },
     { id: "signin", to: "/sign-in", name: "sign in" },
     { id: "signup", to: "/sign-up", name: "sign up" },

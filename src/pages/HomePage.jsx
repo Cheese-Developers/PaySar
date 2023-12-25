@@ -24,7 +24,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="text-white pt-32">
+    <div className="text-white pt-32 bg-primary">
       <SectionText>
         <div className="flex flex-col justify-center items-center w-full h-full z-[2]">
           <h4 className="text-3xl md:text-4xl font-semibold font-curve mb-4 text-center drop-shadow-2xl">

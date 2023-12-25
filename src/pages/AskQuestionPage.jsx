@@ -47,7 +47,7 @@ const AskQuestionPage = () => {
   }, []);
 
   return (
-    <div className="pt-32">
+    <div className="pt-32 bg-primary">
       <SectionText>
         <div className="flex flex-col justify-center items-center text-secondary w-[95%] md:w-[80%] lg:w-[70%] xl:w-[65%] mx-auto h-full z-[2] select-none">
           <h3 className="text-4xl font-semibold font-curve mb-4 text-center drop-shadow-2xl">

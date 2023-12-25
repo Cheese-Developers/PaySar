@@ -51,7 +51,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex justify-center items-center text-primary h-screen">
+    <div className="flex justify-center items-center text-primary h-screen bg-primary">
       {isLoading ? (
         <Loader />
       ) : (
