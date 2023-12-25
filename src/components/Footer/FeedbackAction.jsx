@@ -1,5 +1,5 @@
 import Lottie from "lottie-react";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { BsArrowRight } from "react-icons/bs";
 import Love from "../../assets/love.json";
 import "../ui/ui.css";
@@ -7,6 +7,8 @@ import { useSendFeedbackMutation } from "../../redux/service/api/feedbackApi";
 import { Radio, Text } from "@mantine/core";
 import { openModalCustom } from "../ui/Modal";
 import { useToken } from "../../hooks/useToken";
+import { SweetAlertToast } from "../../libs/SweetAlert";
+import Swal from "sweetalert2";
 
 const FeedbackAction = () => {
   const [sendFeedback] = useSendFeedbackMutation();
@@ -30,9 +32,20 @@ const FeedbackAction = () => {
       const res = await sendFeedback({ token, data: feedbackData });
       const { data, error } = res;
       if (data?.data) {
-        alert(data?.msg);
+        feedbackRef.current.value = "";
+        checkboxRefs[checkbox].current.checked = false;
+
+        SweetAlertToast.fire({
+          icon: "success",
+          title: "Send feedback is successfully",
+          position: "top",
+        });
       } else {
-        alert(error?.data.msg || "An error occurred");
+        SweetAlertToast.fire({
+          icon: "error",
+          title: error?.data?.msg || "An error occurred",
+          position: "top",
+        });
       }
     } catch (error) {
       console.error(error);
@@ -41,19 +54,29 @@ const FeedbackAction = () => {
 
   const openFeedbackModal = (event) => {
     event.preventDefault();
-    openModalCustom({
-      title: "Feedback Confirmation",
-      children: (
-        <Text size="sm">
-          We appreciate your feedback! 🌟 Are you sure you want to submit your
-          thoughts to our admin team?
-        </Text>
-      ),
-      confirmText: "Yes, submit my feedback 🚀",
-      cancelText: "No, I'll rethink 🤔",
-      onConfirm: sendFeedbackHandler,
-      onCancel: () => {},
-    });
+    const feedback = feedbackRef.current.value;
+    if (feedback.trim(" ").length === 0) {
+      Swal.fire({
+        title: "Feedback error",
+        text: "You didn't type any feedback yet",
+        timer: 2000,
+        icon: "warning",
+      });
+    } else {
+      openModalCustom({
+        title: "Feedback Confirmation",
+        children: (
+          <Text size="sm">
+            We appreciate your feedback! 🌟 Are you sure you want to submit your
+            thoughts to our admin team?
+          </Text>
+        ),
+        confirmText: "Yes, submit my feedback 🚀",
+        cancelText: "No, I'll rethink 🤔",
+        onConfirm: sendFeedbackHandler,
+        onCancel: () => {},
+      });
+    }
   };
 
   return (

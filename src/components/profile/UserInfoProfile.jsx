@@ -21,18 +21,21 @@ const UserInfoProfile = ({
   return (
     <div className="pt-12 w-[95%] md:w-[80%] lg:w-[70%] xl:w-[65%] mx-auto">
       <div className="user-information bg-slate-900 rounded-lg shadow-2xl text-secondary font-medium flex flex-col justify-center items-center gap-6 w-[95%] md:w-[70%] lg:w-[65%] xl:w-[60%] mx-auto py-10">
-        <div className="w-48 h-48 overflow-hidden rounded-full">
+        <div
+          className="w-48 h-48 overflow-hidden rounded-full cursor-pointer"
+          onClick={() => open()}
+        >
           <img
             src={image_url ? image_url : anonymous_img}
             alt=""
             className="w-48 h-48 object-cover"
           />
         </div>
-        <h4 className="capitalize text-2xl">{username}</h4>
+        <h4 className="capitalize text-2xl font-curve">{username}</h4>
         <h4>{email}</h4>
         {description && (
-          <div>
-            <h4>About</h4>
+          <div className="text-center">
+            <h4 className="mb-2 font-curve text-2xl">About</h4>
             <p>{description}</p>
           </div>
         )}

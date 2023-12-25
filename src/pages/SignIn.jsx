@@ -7,10 +7,9 @@ import Input from "../components/ui/Input";
 import AuthForm from "../components/ui/AuthForm";
 import { useDispatch } from "react-redux";
 import { addUserToken } from "../redux/service/slice/userTokenSlice";
-import Lottie from "lottie-react";
-import loader from "../assets/loaderAnimate.json";
 import { SweetAlertToast } from "../libs/SweetAlert";
 import Cookies from "js-cookie";
+import Loader from "../components/ui/Loader";
 
 const SignIn = () => {
   const [email, setEmail] = useState(null);
@@ -52,11 +51,9 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex justify-center items-center text-primary h-screen">
+    <div className="flex justify-center items-center text-primary h-screen bg-primary">
       {isLoading ? (
-        <div>
-          <Lottie animationData={loader} loop={true} autoplay={true} />
-        </div>
+        <Loader />
       ) : (
         <div className="w-[95%] md:w-[400px] py-8 px-6 bg-secondary flex flex-col justify-center rounded-md shadow-md md:shadow-lg">
           <AuthFormHeader text={"Sign In"} />

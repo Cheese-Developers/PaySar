@@ -17,17 +17,17 @@ export const useNavLink = () => {
   }, []);
 
   const authLinks = [
-    { id: "signup", to: "/sign-up", name: "sign up" },
-    { id: "signin", to: "/sign-in", name: "sign in" },
     {
       id: "ask-question",
       to: user
         ? `/user/${
-            data?.username ? data?.username : user && user.username
+            data?.username ? data?.username : user && user?.username
           }/ask-question`
-        : "sign-up",
-      name: user ? "ask question" : "get started",
+        : "/sign-in",
+      name: `${user?.username ? "ask question" : "get started"}`,
     },
+    { id: "signin", to: "/sign-in", name: "sign in" },
+    { id: "signup", to: "/sign-up", name: "sign up" },
   ];
 
   const links = [

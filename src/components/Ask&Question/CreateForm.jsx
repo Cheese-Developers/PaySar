@@ -10,19 +10,21 @@ import { Text } from "@mantine/core";
 import Cookies from "js-cookie";
 import Swal from "sweetalert2";
 
-const CreateForm = ({ userInfo, selectedUser }) => {
+const CreateForm = ({ userInfo, selectedUser, name }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [createPaySar, { isLoading }] = useCreatePaySarMutation();
   const navigate = useNavigate();
   const cookiePostLimit = parseInt(Cookies.get("post") || 0, 10);
+  console.log(name);
 
   const confirmationPost = async () => {
     try {
       const post = {
-        username: userInfo?.username,
+        username: selectedUser,
         title: title,
         content: content,
+        sender_id: userInfo?.user_id,
       };
       if (cookiePostLimit >= 10) {
         return alert("Your daily post (3) limit has been reached");
