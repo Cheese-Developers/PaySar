@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const userApi = createApi({
   reducerPath: "userApi",
   tagTypes: ["user"],
-  baseQuery: fetchBaseQuery({ baseUrl: `https://paysr.onrender.com/v1` }),
+  baseQuery: fetchBaseQuery({ baseUrl: `http://localhost:3200/v1` }),
   endpoints: (builder) => ({
     userInfo: builder.query({
       query: (name) => ({
