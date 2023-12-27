@@ -41,7 +41,7 @@ const PostContents = ({ questions, isLoading, home }) => {
 
   return (
     <>
-      {questions.length > 0 ? (
+      {questions?.length > 0 ? (
         <div className="min-h-full flex justify-between gap-4 w-[97%] md:w-[80%] lg:w-[70%] xl:w-[65%] mx-auto pt-10 relative text-secondary pb-10">
           <div className="flex w-full md:w-[60%] flex-col gap-6">
             {/* {questions?.map((question) => (

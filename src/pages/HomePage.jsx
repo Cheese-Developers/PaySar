@@ -54,7 +54,7 @@ const HomePage = () => {
               error={error}
               isLoading={isLoading}
               home={true}
-              totalPage={questions.totalPage}
+              totalPage={questions?.totalPage}
               setPage={setPage}
               page={page}
             />
