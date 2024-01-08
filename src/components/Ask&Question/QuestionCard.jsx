@@ -24,7 +24,7 @@ const QuestionCard = ({
       const paysar = { paysarId: paysar_id, replay: reply };
       const res = await replyPaySar({ token, paysar: paysar });
       const { data, error } = res;
-      console.log(data, error);
+      // console.log(data, error);
       if (data?.data) {
         alert(data.msg);
       } else {
@@ -56,7 +56,7 @@ const QuestionCard = ({
     });
   };
 
-  console.log(username);
+  // console.log(username);
 
   return (
     <div className="min-h-min p-5 rounded-lg bg-slate-800 flex justify-center flex-col shadow-md">

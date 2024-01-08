@@ -8,6 +8,7 @@ import AuthForm from "../components/ui/AuthForm";
 import { useDispatch } from "react-redux";
 import { SweetAlertToast } from "../libs/SweetAlert";
 import Loader from "../components/ui/Loader";
+import { addUserToken } from "../redux/service/slice/userTokenSlice";
 
 const SignUp = () => {
   const [username, setUsername] = useState(null);
@@ -28,19 +29,18 @@ const SignUp = () => {
       // const user = { username, email, password };
       // console.log(user);
       // const res = await signUp(user);
-
       // const { data, error } = res;
       // if (data?.data) {
       //   dispatch(addUserToken(data.token));
       //   navigate("/");
-      // SweetAlertToast.fire({
-      //   icon: "success",
-      //   title: "Signed in successfully",
-      // });
+      //   SweetAlertToast.fire({
+      //     icon: "success",
+      //     title: "Signed in successfully",
+      //   });
       // } else {
       //   console.log(error);
       // }
-      alert("Opps! We are really sorry. This Page is currently working");
+      alert("Opps! We are really sorry. This Page is currently developing...");
     } catch (error) {
       console.error(error);
     }

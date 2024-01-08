@@ -16,12 +16,10 @@ const CreateForm = ({ userInfo, selectedUser, name }) => {
   const [createPaySar, { isLoading }] = useCreatePaySarMutation();
   const navigate = useNavigate();
   const cookiePostLimit = parseInt(Cookies.get("post") || 0, 10);
-  console.log(name);
-
   const confirmationPost = async () => {
     try {
       const post = {
-        username: selectedUser,
+        username: name,
         title: title,
         content: content,
         sender_id: userInfo?.user_id,
@@ -62,7 +60,7 @@ const CreateForm = ({ userInfo, selectedUser, name }) => {
           title: "Invalid Title",
           text: "Please title must be at least 10 characters.",
         });
-      } else if (content.length < 50 || content.length > 3000) {
+      } else if (content.length < 20 || content.length > 3000) {
         Swal.fire({
           icon: "error",
           title: "Invalid Content Length",
@@ -128,7 +126,7 @@ const CreateForm = ({ userInfo, selectedUser, name }) => {
         </div>
         <div className="flex flex-col gap-3 mb-6">
           <label htmlFor="content" className="text-secondary">
-            <span className="font-medium">Content ( Max 50 | Min 3000) </span>
+            <span className="font-medium">Content ( Max 20 | Min 3000) </span>
             {content.length > 1000 && (
               <span
                 className={`ml-3 ${

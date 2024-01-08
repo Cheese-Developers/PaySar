@@ -11,6 +11,7 @@ import UserSelection from "../components/Ask&Question/UserSelection";
 import UserInformation from "../components/Ask&Question/UserInformation";
 import SectionText from "../components/ui/SectionText";
 import Vector from "../svg/Vector.svg";
+import UserLoader from "../components/UserLoader";
 
 const default_img =
   "https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg";
@@ -45,7 +46,9 @@ const AskQuestionPage = () => {
       Cookies.set("post", 0, { expires: expirationDate });
     }
   }, []);
-
+  if (unLoggedUserLoading) {
+    return <UserLoader />;
+  }
   return (
     <div className="pt-32 bg-primary">
       <SectionText>

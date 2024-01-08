@@ -6,7 +6,6 @@ import { useUserDetailQuery } from "../redux/service/api/userApi";
 export const useNavLink = () => {
   const { token } = useToken();
   const { data, error, isLoading } = useUserDetailQuery(token);
-  console.log(data);
 
   const [user, setUser] = useState(null);
   useEffect(() => {
@@ -39,8 +38,6 @@ export const useNavLink = () => {
       name: "ask question",
     },
   ];
-
-  console.log(data, error, "from useNavLink");
 
   return { authLinks, links, isLoading };
 };

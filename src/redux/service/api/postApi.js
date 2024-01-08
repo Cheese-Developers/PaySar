@@ -4,7 +4,7 @@ import { baseUrl } from "../../../helper/helper";
 export const postApi = createApi({
   reducerPath: "postApi",
   tagTypes: ["paysar"],
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3200/v1/api" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://paysr.onrender.com/v1/api" }),
   endpoints: (builder) => ({
     getPost: builder.query({
       query: (token) => ({
