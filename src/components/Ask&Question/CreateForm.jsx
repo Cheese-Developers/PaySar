@@ -112,7 +112,7 @@ const CreateForm = ({ userInfo, selectedUser, name }) => {
 
         <div className="flex flex-col gap-3 mb-6">
           <label htmlFor="question" className="text-secondary font-medium">
-            Question Title ( Maximum letters 10 )
+            Question Title ( Minimum letters 10 )
           </label>
           <input
             type="text"
@@ -126,7 +126,7 @@ const CreateForm = ({ userInfo, selectedUser, name }) => {
         </div>
         <div className="flex flex-col gap-3 mb-6">
           <label htmlFor="content" className="text-secondary">
-            <span className="font-medium">Content ( Max 20 | Min 3000) </span>
+            <span className="font-medium">Content ( Min 20 | Max 3000) </span>
             {content.length > 1000 && (
               <span
                 className={`ml-3 ${
@@ -150,7 +150,7 @@ const CreateForm = ({ userInfo, selectedUser, name }) => {
           />
         </div>
         <div className="">
-          <Button text={isLoading ? "loading..." : "Post now"} type="submit" />
+          <Button text={isLoading ? "loading..." : "Send now"} type="submit" />
         </div>
       </form>
     </div>

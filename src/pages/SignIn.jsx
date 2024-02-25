@@ -12,8 +12,8 @@ import Cookies from "js-cookie";
 import Loader from "../components/ui/Loader";
 
 const SignIn = () => {
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const cookiesPost = Cookies.get("post");
 
   const dispatch = useDispatch();

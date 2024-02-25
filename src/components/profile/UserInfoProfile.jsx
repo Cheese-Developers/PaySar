@@ -14,7 +14,7 @@ const UserInfoProfile = ({
 }) => {
   const user = { image_url, email, username, description };
   const [opened, { open, close }] = useDisclosure(false);
-
+  console.log(user);
   const anonymous_img =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzPb_pSj-ir-9eB6mi0lVJdQP1KKHiB8fRBS1CbmOXGd9Z1FEGMJHbEKhahwhWLGSaEXY&usqp=CAU";
 

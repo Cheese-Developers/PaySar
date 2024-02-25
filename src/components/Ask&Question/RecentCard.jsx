@@ -21,7 +21,7 @@ const RecentCard = ({ title, img, sent_date, username, image_url }) => {
         </div>
       </div>
       <span className="text-sm text-gray-500 ml-8">
-        <ReactTimeAgo date={sent_date} locale="en-US" />
+        <ReactTimeAgo date={new Date(sent_date)} locale="en-US" />
       </span>
     </div>
   );

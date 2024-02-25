@@ -9,12 +9,14 @@ import { useDispatch } from "react-redux";
 import { SweetAlertToast } from "../libs/SweetAlert";
 import Loader from "../components/ui/Loader";
 import { addUserToken } from "../redux/service/slice/userTokenSlice";
+import Cookies from "js-cookie";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
-  const [username, setUsername] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [passwordConfirmation, setPasswordConfirmation] = useState(null);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,8 +33,12 @@ const SignUp = () => {
       // const res = await signUp(user);
       // const { data, error } = res;
       // if (data?.data) {
+      //   const expirationDate = new Date();
+      //   expirationDate.setDate(expirationDate.getDate() + 1);
+      //   Cookies.set("post", 0, { expires: expirationDate });
       //   dispatch(addUserToken(data.token));
       //   navigate("/");
+
       //   SweetAlertToast.fire({
       //     icon: "success",
       //     title: "Signed in successfully",
@@ -40,7 +46,12 @@ const SignUp = () => {
       // } else {
       //   console.log(error);
       // }
-      alert("Opps! We are really sorry. This Page is currently developing...");
+      // alert("Opps! We are really sorry. This Page is currently developing...");
+      Swal.fire({
+        title: "Opps! We are really sorry.",
+        text: " This Page is currently developing...",
+        icon: "question",
+      });
     } catch (error) {
       console.error(error);
     }

@@ -10,7 +10,7 @@ import Vector from "../svg/Vector.svg";
 const ProfilePage = () => {
   const token = Cookies.get("token");
   const { data, error, isLoading } = useUserDetailQuery(token);
-
+  console.log(data, token);
   const {
     data: questions,
     error: questionError,
